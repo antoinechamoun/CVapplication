@@ -19,6 +19,14 @@ const InputWrapper = styled.input`
   border-radius: 5px;
   border: 1px solid transparent;
   outline: none;
+  
+  &::-webkit-outer-spin-button{
+    -webkit-appearance: none;
+  }
+
+  &::-webkit-inner-spin-button{
+    -webkit-appearance: none;
+  }
 
   &:focus {
     border: 1px solid gray;

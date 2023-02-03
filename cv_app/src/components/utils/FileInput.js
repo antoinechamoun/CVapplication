@@ -3,7 +3,7 @@ import styled from "styled-components";
 const Input = ({ id, type, onChange, value, placeHolder }) => {
   return (
     <Label>
-      <b>Select a photo</b>
+      Select a photo
       <InputWrapper
         id={id}
         type={type}
@@ -23,7 +23,7 @@ const Label = styled.label`
   border-radius: 5px;
   border: 1px solid transparent;
   background-color: white;
-  padding-top: 10px;
+  padding-top: 8px;
   cursor: pointer;
   padding-left: 5px;
 

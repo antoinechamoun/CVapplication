@@ -1,13 +1,23 @@
-import { useState } from "react";
 import styled from "styled-components";
 import Input from "./utils/Input";
 import FileInput from "./utils/FileInput";
 
-const PersonalInformation = () => {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [title, setTitle] = useState("");
-
+const PersonalInformation = ({
+  firstName,
+  setFirstName,
+  lastName,
+  setLastName,
+  title,
+  setTitle,
+  address,
+  setAddress,
+  phoneNumber,
+  setPhoneNumber,
+  email,
+  setEmail,
+  description,
+  setDescription,
+}) => {
   const handleChange = (e, field) => {
     switch (field) {
       case "firstName":
@@ -20,6 +30,22 @@ const PersonalInformation = () => {
 
       case "title":
         setTitle(e.target.value);
+        break;
+
+        case "address":
+        setAddress(e.target.value);
+        break;
+
+        case "phoneNumber":
+        setPhoneNumber(e.target.value);
+        break;
+
+        case "email":
+        setEmail(e.target.value);
+        break;
+
+        case "description":
+        setDescription(e.target.value);
         break;
       default:
         break;
@@ -47,6 +73,30 @@ const PersonalInformation = () => {
         value={title}
       />
       <FileInput id="file" type="file" />
+      <Input
+        type="text"
+        placeHolder="Address"
+        onChange={(e) => handleChange(e, "address")}
+        value={address}
+      />
+      <Input
+        type="number"
+        placeHolder="Phone Number"
+        onChange={(e) => handleChange(e, "phoneNumber")}
+        value={phoneNumber}
+      />
+      <Input
+        type="email"
+        placeHolder="Email"
+        onChange={(e) => handleChange(e, "email")}
+        value={email}
+      />
+      <Input
+        type="text"
+        placeHolder="Description"
+        onChange={(e) => handleChange(e, "description")}
+        value={description}
+      />
     </PersonalContainer>
   );
 };
