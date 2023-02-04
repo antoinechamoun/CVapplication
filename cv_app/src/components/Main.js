@@ -2,10 +2,12 @@ import styled from "styled-components";
 import PersonalInformation from "./PersonalInformation";
 import Experience from "./Experience";
 import Education from "./Education";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import CV from "./CV";
+import { useReactToPrint } from 'react-to-print'
 
 const Main = () => {
+  const toPrint = useRef()
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [title, setTitle] = useState("");
@@ -13,7 +15,9 @@ const Main = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [email, setEmail] = useState("");
   const [description, setDescription] = useState("");
-  const[image, setImage] = useState('https://comotion.uw.edu/wp-content/uploads/2019/05/generic-profile.png')
+  const [image, setImage] = useState(
+    "https://comotion.uw.edu/wp-content/uploads/2019/05/generic-profile.png"
+  );
   const [experience, setExperience] = useState([
     {
       position: "",
@@ -65,6 +69,10 @@ const Main = () => {
     ]);
   };
 
+  const generatePDF = useReactToPrint({
+    content:()=>toPrint.current,
+  })
+
   return (
     <MainContainer>
       <InnerContainer>
@@ -109,7 +117,7 @@ const Main = () => {
         })}
         <Button onClick={addNewEducation}>Add new Education</Button>
       </InnerContainer>
-      <GeneratedCV>
+      <GeneratedCV ref={toPrint}>
         <CV
           firstName={firstName}
           lastName={lastName}
@@ -121,8 +129,10 @@ const Main = () => {
           experience={experience}
           education={education}
           image={image}
-        />
+          />
+          
       </GeneratedCV>
+      <Button onClick={generatePDF} >Generate PDF</Button>
     </MainContainer>
   );
 };
