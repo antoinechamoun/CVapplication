@@ -13,6 +13,7 @@ const Main = () => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [email, setEmail] = useState("");
   const [description, setDescription] = useState("");
+  const[image, setImage] = useState('https://comotion.uw.edu/wp-content/uploads/2019/05/generic-profile.png')
   const [experience, setExperience] = useState([
     {
       position: "",
@@ -82,6 +83,8 @@ const Main = () => {
           setEmail={setEmail}
           description={description}
           setDescription={setDescription}
+          image={image}
+          setImage={setImage}
         />
         {experience.map((xp, id) => {
           return (
@@ -117,6 +120,7 @@ const Main = () => {
           description={description}
           experience={experience}
           education={education}
+          image={image}
         />
       </GeneratedCV>
     </MainContainer>

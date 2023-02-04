@@ -8,6 +8,7 @@ const CV = ({
   phoneNumber,
   email,
   description,
+  image,
   experience,
   education,
 }) => {
@@ -68,7 +69,7 @@ const CV = ({
           })}
         </MainInfo>
         <Info>
-            <img src="" alt="not available"/>
+            <Image src={image} alt="not available"/>
             <h3>Personal Details</h3>
             <hr/>
             Address:
@@ -82,6 +83,11 @@ const CV = ({
     </Container>
   );
 };
+
+const Image = styled.img`
+  width:15vw;
+  height:auto;
+`
 
 const Container = styled.div`
   display: flex;

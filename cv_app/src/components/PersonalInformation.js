@@ -17,6 +17,8 @@ const PersonalInformation = ({
   setEmail,
   description,
   setDescription,
+  image,
+  setImage,
 }) => {
   const handleChange = (e, field) => {
     switch (field) {
@@ -32,19 +34,30 @@ const PersonalInformation = ({
         setTitle(e.target.value);
         break;
 
-        case "address":
+      case "address":
         setAddress(e.target.value);
         break;
 
-        case "phoneNumber":
+      case "phoneNumber":
         setPhoneNumber(e.target.value);
         break;
 
-        case "email":
+      case "image":
+        const file = e.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = () => {
+          setImage(reader.result);
+        };
+        reader.readAsDataURL(file);
+        break;
+
+      case "email":
         setEmail(e.target.value);
         break;
 
-        case "description":
+      case "description":
         setDescription(e.target.value);
         break;
       default:
@@ -72,7 +85,11 @@ const PersonalInformation = ({
         onChange={(e) => handleChange(e, "title")}
         value={title}
       />
-      <FileInput id="file" type="file" />
+      <FileInput
+        id="file"
+        onChange={(e) => handleChange(e, "image")}
+        type="file"
+      />
       <Input
         type="text"
         placeHolder="Address"
