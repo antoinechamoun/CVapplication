@@ -1,19 +1,48 @@
 import styled from "styled-components";
 import Input from "./utils/Input";
 
-const Experience = ({ experience, setExperience }) => {
-  const { position, company, city, from, to } = experience;
+const Experience = ({ singleExperience, allExperiences, setExperience }) => {
+  const { position, company, city, from, to, idx } = singleExperience;
 
   const handleChange = (e, field) => {
-    switch (field) {
-      case "position":
-        setExperience(e.target.value);
-        break;
+    const newExp = allExperiences.map((xp) => {
+      if (xp.idx === idx) {
+        switch (field) {
+          case "position":
+            xp = { ...xp, position: e.target.value };
+            break;
 
-      default:
-        break;
-    }
+          case "company":
+            xp = { ...xp, company: e.target.value };
+            break;
+
+          case "city":
+            xp = { ...xp, city: e.target.value };
+            break;
+
+          case "from":
+            xp = { ...xp, from: e.target.value };
+            break;
+
+          case "to":
+            xp = { ...xp, to: e.target.value };
+            break;
+
+          default:
+            break;
+        }
+        return xp;
+      }
+      return xp;
+    });
+    setExperience(newExp);
   };
+
+  const deleteExperience = () => {
+    const newExp = allExperiences.filter((xp) => xp.idx !== idx);
+    setExperience(newExp);
+  };
+
   return (
     <ExperienceWrapper>
       <h3>Experience</h3>
@@ -47,7 +76,7 @@ const Experience = ({ experience, setExperience }) => {
         onChange={(e) => handleChange(e, "to")}
         value={to}
       />
-      <Button>Delete</Button>
+      <Button onClick={deleteExperience}>Delete</Button>
     </ExperienceWrapper>
   );
 };
@@ -58,8 +87,9 @@ const Button = styled.button`
   padding: 8px;
   border-radius: 5px;
   border: transparent;
-  background-color: light-gray;
+  background-color: black;
+  color: white;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-  cursor:pointer;
+  cursor: pointer;
 `;
 export default Experience;
